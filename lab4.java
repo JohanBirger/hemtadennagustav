@@ -1,5 +1,5 @@
+import java.util.Scanner;
 
-    import java.util.Scanner;
 
 
     /**
@@ -18,6 +18,8 @@
          *
          */
         public static void run() {
+
+
 
             Scanner sc = new Scanner(System.in);
             String user_input = "";
@@ -38,7 +40,12 @@
                 int index = 0;
                 int score = 0;
                 int eng_word_length = eng_words[j].length();
-                double CloseToCorrectMargin = 0.75;
+                double CloseToCorrectMargin = 0.5;
+                Double newCloseToCorrectMargin = new Double(CloseToCorrectMargin);
+                int value = newCloseToCorrectMargin.intValue();
+                int varx = eng_word_length * value;
+
+
 
                 //ahfhfhf
                 for (j = 0; j == index; j++) {
@@ -53,33 +60,35 @@
                             index++;
                             score++;
 
-                            if (index == eng_word_length) {
+                            if (index == eng_words.length) {
                                 System.out.println(ANSI_GREEN + "Korrekt!" + ANSI_RESET + score + " rätt av " + index + " ord." + "\nDu svarade på totalt " + index + " och hade " + score + " rätt. Välkommen åter!");
                                 quit = true;
                             } else {
                                 System.out.println(ANSI_GREEN + "Korrekt!" + ANSI_RESET + score + " rätt av " + index + " ord.");
 
+
                             }
                         }
                         //blbl
-                        else if (user_input.compareToIgnoreCase(eng_words[j].substring(0, eng_word_length)) >= (CloseToCorrectMargin * eng_word_length)) {
+                        else if (user_input.contains(eng_words[j].substring(0,varx))) {
                             index++;
-                            if (index == eng_word_length) {
-                                System.out.println("Nästan rätt. Korrekt svar är " + eng_words);
+                            if (index == eng_words.length) {
+                                System.out.println("Nästan rätt. Korrekt svar är " + eng_words[j]);
                                 System.out.println("Du svarade på totalt " + index + " glosor och hade " + score + " rätt. Välkommen åter!");
                             } else {
-                                System.out.println("Nästan rätt. Korrekt svar är " + eng_words);
+                                System.out.println("Nästan rätt. Korrekt svar är " + eng_words[j]);
                             }
 
 
                         } else {
                             index++;
-                            if (index == eng_word_length) {
-                                System.out.println(ANSI_RED + "Fel svar!" + ANSI_RESET + " Korrekt svar är " + eng_words);
+                            if (index == eng_words.length) {
+                                System.out.println(ANSI_RED + "Fel svar!" + ANSI_RESET + " Korrekt svar är " + eng_words[j]);
                                 System.out.println("Du svarade på totalt " + index + " och hade " + score + "rätt. Välkomen åter!");
-                            } else {
-                                System.out.println("Fel svar!. Rätt svar är " + eng_words + ".");
 
+                            } else {
+                                System.out.println("Fel svar!. Rätt svar är " + eng_words[j] + ".");
+                                System.out.println(user_input.contains(eng_words[j].substring(0,varx)));
 
                             }
 
@@ -96,7 +105,7 @@
 
     }
 
-       
+
 
 
     class VocabularyArray {
@@ -112,6 +121,7 @@
             return eng_words.clone();
         }
     }
+
 
 
 
